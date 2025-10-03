@@ -52,62 +52,28 @@
             color: #ffc107; /* لون أصفر للتأثير */
         }
 
-        /* منطقة العرض الرئيسية (البطل) */
+        /* منطقة العرض الرئيسية (البطل) - تم تبسيطها للمحتوى الموجز */
         .hero {
-            /* استخدام صورة Placeholder يمكن تغييرها لاحقًا */
-            background-image: url('https://placehold.co/1200x600/007bff/ffffff?text=صورة+مبنى+المدرسة');
-            background-size: cover;
-            background-position: center;
+            background-color: #007bff;
             color: white;
             text-align: center;
-            padding: 150px 20px;
-            position: relative;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* طبقة داكنة فوق الصورة */
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
+            padding: 50px 20px; /* تقليل الـ padding لجعلها أقصر */
         }
 
         .hero h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
+            font-size: 2.5em; /* تصغير الخط قليلاً */
+            margin-bottom: 5px;
         }
 
         .hero h2 {
-            font-size: 1.5em;
-            margin-bottom: 30px;
+            font-size: 1.2em; /* تصغير الخط قليلاً */
+            margin-bottom: 0;
             font-weight: 400;
         }
-
-        .cta-button {
-            display: inline-block;
-            background-color: #28a745; /* لون أخضر جذاب */
-            color: white;
-            padding: 10px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 700;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #218838;
-        }
-
+        
         /* تنسيق الأقسام الرئيسية */
         .section {
-            padding: 60px 0;
+            padding: 40px 0; /* تقليل الـ padding لجعل الأقسام أقصر */
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
@@ -116,7 +82,7 @@
         .section h2 {
             text-align: center;
             color: #007bff;
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* تقليل الـ margin */
             font-weight: 700;
             border-bottom: 3px solid #ffc107;
             display: block;
@@ -129,20 +95,20 @@
         /* رسالة المدير */
         .director-message {
             background-color: white;
-            padding: 30px;
+            padding: 25px; /* تقليل الـ padding */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
             text-align: justify;
         }
 
         .director-message p {
-            line-height: 1.8;
-            margin-bottom: 15px;
+            line-height: 1.7; /* تقليل التباعد قليلاً */
+            margin-bottom: 10px;
         }
 
         .director-message strong {
             display: block;
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: left;
             font-weight: 700;
         }
@@ -151,15 +117,15 @@
         .news-table, .results-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: right;
             border-radius: 8px;
-            overflow: hidden; /* للحفاظ على حدود مستديرة */
+            overflow: hidden; 
         }
 
         .news-table th, .news-table td,
         .results-table th, .results-table td {
-            padding: 12px;
+            padding: 10px; /* تقليل الـ padding */
             border-bottom: 1px solid #ddd;
             text-align: right;
         }
@@ -178,31 +144,31 @@
         /* قسم الاستعلام */
         .inquiry-box {
             background-color: #fff;
-            padding: 40px;
+            padding: 30px; /* تقليل الـ padding */
             border-radius: 12px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 40px auto;
+            max-width: 500px; /* تقليل العرض قليلاً */
+            margin: 20px auto;
             text-align: center;
             border: 1px solid #007bff;
         }
 
         .inquiry-box label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
             color: #007bff;
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         .inquiry-box input[type="text"] {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
+            padding: 10px;
+            margin-bottom: 15px;
             border: 2px solid #ccc;
             border-radius: 6px;
             box-sizing: border-box;
-            font-size: 1em;
+            font-size: 0.9em;
             transition: border-color 0.3s;
         }
 
@@ -214,12 +180,12 @@
         .inquiry-box button {
             background-color: #007bff;
             color: white;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 1.1em;
+            font-size: 1em;
             transition: background-color 0.3s, transform 0.1s;
         }
 
@@ -229,26 +195,27 @@
         }
 
         #results-area {
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: right;
-            min-height: 100px;
+            min-height: 80px;
         }
 
+        .error-message, .success-message {
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+        
         .error-message {
             color: #dc3545;
-            font-weight: 700;
-            padding: 15px;
             background-color: #f8d7da;
             border: 1px solid #f5c6cb;
-            border-radius: 6px;
-            text-align: center;
         }
 
         .success-message {
             color: #28a745;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-align: center;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
         }
         
         /* Loading spinner CSS */
@@ -256,8 +223,8 @@
             border: 4px solid rgba(0, 0, 0, .1);
             border-left-color: #007bff;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
@@ -266,62 +233,11 @@
             to { transform: rotate(360deg); }
         }
 
-        /* القيم الجوهرية (البطاقات) */
-        .values-grid {
-            display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .value-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: calc(33% - 20px);
-            min-width: 250px;
-            text-align: center;
-            border-top: 5px solid #007bff;
-        }
-
-        .value-card h3 {
-            color: #007bff;
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-
-        /* الروابط السريعة */
-        .quick-links {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            text-align: center;
-        }
-
-        .quick-link-item {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-            width: calc(25% - 20px);
-            min-width: 150px;
-            text-decoration: none;
-            color: #343a40;
-            transition: transform 0.3s;
-        }
-
-        .quick-link-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-        }
-
         /* التذييل */
         .footer {
             background-color: #343a40;
             color: white;
-            padding: 40px 0;
+            padding: 20px 0; /* تقليل الـ padding */
             text-align: center;
         }
 
@@ -335,34 +251,28 @@
             text-align: right;
         }
 
-        .contact-info, .social-media {
+        .contact-info {
             flex: 1;
             min-width: 200px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-align: right;
         }
 
         .copyright {
             text-align: center;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         
         .footer h4 {
             color: #ffc107;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
         }
 
         .footer p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .social-media a {
-            color: white;
-            font-size: 1.5em;
-            margin-left: 15px; /* المسافة بين الأيقونات */
-            text-decoration: none;
+            margin: 3px 0;
+            font-size: 0.8em;
         }
 
         /* تصميم متجاوب (للهواتف والأجهزة الصغيرة) */
@@ -371,69 +281,50 @@
                 flex-direction: column;
             }
             .nav-links {
-                margin-top: 15px;
+                margin-top: 10px;
                 text-align: center;
             }
             .nav-links a {
-                margin: 0 10px;
-                display: inline-block;
+                margin: 0 8px;
             }
             .hero {
-                padding: 100px 20px;
+                padding: 40px 20px;
             }
             .hero h1 {
-                font-size: 2.5em;
-            }
-            .values-grid, .quick-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            .value-card, .quick-link-item {
-                width: 90%;
-                margin-bottom: 15px;
+                font-size: 2em;
             }
             .footer-content {
                 flex-direction: column;
                 align-items: center;
             }
-            .contact-info, .social-media {
+            .contact-info {
                 text-align: center;
                 width: 100%;
             }
-            .social-media a {
-                margin: 0 10px;
-            }
             .inquiry-box {
-                padding: 20px;
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. شريط التنقل العلوي -->
+    <!-- 1. شريط التنقل العلوي: اسم المدرسة و رابط تواصل معنا -->
     <nav class="navbar">
         <div class="navbar-container">
             <div class="logo"><a href="#home">مدرسة الخدمة الثانوية العامة المشتركة</a></div>
             <div class="nav-links">
-                <a href="#home">الصفحة الرئيسية</a>
-                <a href="#about">عن المدرسة</a>
-                <a href="#academic">الأقسام الأكاديمية</a>
-                <a href="#services">الخدمات الطلابية</a>
-                <a href="#admission">القبول والتسجيل</a>
-                <a href="#media">المركز الإعلامي</a>
+                <a href="#home">الرئيسية</a>
                 <a href="#contact">تواصل معنا</a>
             </div>
         </div>
     </nav>
 
-    <!-- 2. منطقة العرض الرئيسية (البطل) -->
+    <!-- 2. منطقة العرض الرئيسية (البطل) - مختصرة -->
     <header id="home" class="hero">
         <div class="hero-content">
             <h1>مدرسة الخدمة الثانوية العامة المشتركة</h1>
-            <h2>"بناء المستقبل يبدأ بخدمة الحاضر."</h2>
-            <p>*رسالتنا: تعليم متكامل، قيادة فاعلة، ومواطنة مسؤولة.*</p>
-            <a href="#academic" class="cta-button">اكتشف مساراتنا الأكاديمية</a>
+            <h2>"تعليم متكامل، قيادة فاعلة، ومواطنة مسؤولة."</h2>
         </div>
     </header>
 
@@ -442,12 +333,12 @@
         <h2>كلمة المدير</h2>
         <div class="director-message">
             <p>مرحباً بكم في بيتنا التعليمي،</p>
-            <p>أبنائي وبناتي الأعزاء، أولياء الأمور الكرام، نفخر في مدرسة الخدمة بكوننا بيئة محفزة تجمع بين التميز الأكاديمي والرعاية الشاملة. هدفنا ليس فقط إعداد طلاب للاختبارات، بل إعداد قادة للمستقبل. نلتزم بغرس القيم والأخلاق الحميدة وتوفير أحدث الأدوات التعليمية لضمان أن يمتلك خريجونا مفاتيح النجاح في المرحلة الجامعية والحياة المهنية. نتطلع إلى شراكة مستمرة وفاعلة معكم لتحقيق رؤيتنا المشتركة.</p>
+            <p1>أبنائي وبناتي الأعزاء، أولياء الأمور الكرام، نفخر في مدرسة الخدمة بكوننا بيئة محفزة تجمع بين التميز الأكاديمي والرعاية الشاملة. نلتزم بغرس القيم والأخلاق الحميدة وتوفير أحدث الأدوات التعليمية لضمان أن يمتلك خريجونا مفاتيح النجاح في المرحلة الجامعية والحياة المهنية. نتطلع إلى شراكة مستمرة وفاعلة معكم لتحقيق رؤيتنا المشتركة.</p1>
             <strong>المدير / [رجب عبد العزيز سالم ]</strong>
         </div>
     </section>
 
-    <!-- 4. أداة استعلام بيانات منصة الذكاء الاصطناعي (NEW FEATURE) -->
+    <!-- 4. أداة استعلام بيانات منصة كوريو (AI) -->
     <section class="section" style="background-color: #e9ecef;">
         <h2>استعلام بيانات منصة كوريو (AI)</h2>
         <div class="inquiry-box">
@@ -460,7 +351,7 @@
         </div>
     </section>
 
-    <!-- 5. الإعلانات والأخبار العاجلة (القسم الأصلي 4) -->
+    <!-- 5. الإعلانات والأخبار العاجلة -->
     <section class="section">
         <h2>أخبار وإعلانات هامة</h2>
         <table class="news-table">
@@ -479,64 +370,17 @@
                 </tr>
                 <tr>
                     <td>**15/10/2025**</td>
-                    <td>**فعالية اليوم المفتوح للأنشطة**</td>
-                    <td>دعوة لأولياء الأمور لحضور معرض الأندية الطلابية في تمام الساعة 10 صباحاً.</td>
-                </tr>
-                <tr>
-                    <td>**20/10/2025**</td>
-                    <td>**تحديث على نظام الدخول الإلكتروني**</td>
-                    <td>إطلاق البوابة الإلكترونية الجديدة للطلاب وأولياء الأمور.</td>
+                    <td>**-------------**</td>
+                    <td>--------------------</td>
                 </tr>
             </tbody>
         </table>
-        <div style="text-align: center;">
-            <a href="#media" class="cta-button" style="background-color: #6c757d;">عرض كافة الأخبار</a>
-        </div>
+        <!-- تم حذف زر عرض كافة الأخبار -->
     </section>
 
-    <!-- 6. القيم الجوهرية (القسم الأصلي 5) -->
-    <section class="section" style="background-color: #e9ecef;">
-        <h2>قيمنا الجوهرية</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <h3>التميز الأكاديمي</h3>
-                <p>مناهج متطورة ومعلمون مؤهلون بأعلى المستويات لضمان التفوق الدراسي.</p>
-            </div>
-            <div class="value-card">
-                <h3>القيادة والابتكار</h3>
-                <p>برامج متخصصة لتنمية مهارات حل المشكلات والتفكير النقدي والإبداعي.</p>
-            </div>
-            <div class="value-card">
-                <h3>الرعاية الشاملة</h3>
-                <p>خدمات إرشادية ونفسية واجتماعية لدعم صحة الطالب ورفاهيته.</p>
-            </div>
-        </div>
-    </section>
+    <!-- تم حذف قسم القيم الجوهرية (القسم 6) وقسم الروابط السريعة (القسم 7) -->
 
-    <!-- 7. الروابط السريعة (القسم الأصلي 6) -->
-    <section class="section" style="padding-top: 0;">
-        <h2>روابط سريعة</h2>
-        <div class="quick-links">
-            <a href="#" class="quick-link-item">
-                <h3>بوابة الطالب/ولي الأمر</h3>
-                <p>الدخول لعرض الدرجات، الغياب، والتواصل مع المعلمين.</p>
-            </a>
-            <a href="#" class="quick-link-item">
-                <h3>منصة التعليم عن بعد</h3>
-                <p>الوصول إلى المحتوى الرقمي، الواجبات، والحصص المسجلة.</p>
-            </a>
-            <a href="#" class="quick-link-item">
-                <h3>جدول الحصص الأسبوعي</h3>
-                <p>تحميل أو استعراض جدول الفصول الحالي.</p>
-            </a>
-            <a href="#admission" class="quick-link-item">
-                <h3>شروط القبول والتسجيل</h3>
-                <p>ابدأ عملية التقديم للعام الدراسي القادم.</p>
-            </a>
-        </div>
-    </section>
-
-    <!-- 8. التذييل (القسم الأصلي 7) -->
+    <!-- 6. التذييل: بيانات الاتصال وحقوق النشر -->
     <footer id="contact" class="footer">
         <div class="footer-content">
             <div class="contact-info">
@@ -545,14 +389,10 @@
                 <p>هاتف: [012345678910]</p>
                 <p>بريد إلكتروني: [alkhedma.sec@gmail.com]</p>
             </div>
-            <div class="social-media">
-                <h4>تابعنا</h4>
-                <a href="#">فيسبوك</a>
-                <a href="#">إنستغرام</a>
-                <a href="#">تويتر</a>
-            </div>
+            <!-- تم حذف Social Media -->
             <div class="copyright">
                 <p>حقوق النشر © 2025 مدرسة الخدمة الثانوية العامة المشتركة. جميع الحقوق محفوظة.</p>
+                <p>مع تحيات محمود عادل</p>
             </div>
         </div>
     </footer>
