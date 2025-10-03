@@ -332,11 +332,10 @@
     <section class="section">
         <h2>كلمة المدير</h2>
         <div class="director-message">
+           <h2>
             <p3>مرحباً بكم في بيتنا التعليمي،</p3>
-            <p> <h2>
-                أبنائي وبناتي الأعزاء، أولياء الأمور الكرام، نفخر في مدرسة الخدمة بكوننا بيئة محفزة تجمع بين التميز الأكاديمي والرعاية الشاملة. نلتزم بغرس القيم والأخلاق الحميدة وتوفير أحدث الأدوات التعليمية لضمان أن يمتلك خريجونا مفاتيح النجاح في المرحلة الجامعية والحياة المهنية. نتطلع إلى شراكة مستمرة وفاعلة معكم لتحقيق رؤيتنا المشتركة.
-            </h2>
-            </p>
+            <p2>أبنائي وبناتي الأعزاء، أولياء الأمور الكرام، نفخر في مدرسة الخدمة بكوننا بيئة محفزة تجمع بين التميز الأكاديمي والرعاية الشاملة. نلتزم بغرس القيم والأخلاق الحميدة وتوفير أحدث الأدوات التعليمية لضمان أن يمتلك خريجونا مفاتيح النجاح في المرحلة الجامعية والحياة المهنية. نتطلع إلى شراكة مستمرة وفاعلة معكم لتحقيق رؤيتنا المشتركة.</p2>
+           </h2>
             <strong>المدير / [رجب عبد العزيز سالم ]</strong>
         </div>
     </section>
@@ -347,11 +346,6 @@
         <div class="inquiry-box">
             <label for="nationalId">الرجاء إدخال الرقم القومي للطالب:</label>
             <input type="text" id="nationalId" placeholder="أدخل الرقم القومي 14 رقم..." maxlength="14" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            
-            <!-- حقل اسم الجد الجديد -->
-            <label for="grandfatherName">اسم الجد (الثالث في الاسم):</label>
-            <input type="text" id="grandfatherName" placeholder="أدخل اسم الجد..." >
-            
             <button onclick="searchStudentData()">البحث عن بيانات الدخول</button>
             <div id="results-area">
                 <!-- نتائج البحث ستظهر هنا -->
@@ -405,28 +399,22 @@
 
     <script>
         /**
-         * دالة جلب بيانات الطلاب من ملف JSON والبحث فيها بناءً على الرقم القومي واسم الجد.
+         * دالة جلب بيانات الطلاب من ملف JSON والبحث فيها.
+         * تم تحويل الدالة إلى async/await لجلب البيانات باستخدام Fetch API.
          */
         async function searchStudentData() {
             const nationalIdInput = document.getElementById('nationalId').value.trim();
-            const grandfatherNameInput = document.getElementById('grandfatherName').value.trim(); // جلب اسم الجد
             const resultsArea = document.getElementById('results-area');
-            resultsArea.innerHTML = '<div class="spinner"></div>'; // إظهار مؤشر التحميل
+            resultsArea.innerHTML = '<div class="spinner"></div>'; // Show loading spinner
 
-            // التحقق من صحة الإدخال للرقم القومي
+            // Validate input (must be 14 digits)
             if (nationalIdInput.length !== 14 || !/^\d+$/.test(nationalIdInput)) {
                 resultsArea.innerHTML = '<div class="error-message">الرجاء إدخال رقم قومي صحيح مكون من 14 رقمًا.</div>';
                 return;
             }
-            
-            // التحقق من اسم الجد
-            if (grandfatherNameInput.length === 0) {
-                resultsArea.innerHTML = '<div class="error-message">الرجاء إدخال اسم الجد للمطابقة الأمنية.</div>';
-                return;
-            }
 
             try {
-                // جلب البيانات من data.json
+                // Fetch data from data.json file
                 const response = await fetch('data.json');
 
                 if (!response.ok) {
@@ -435,15 +423,13 @@
 
                 const studentData = await response.json();
 
-                // منطق البحث: المطابقة بالرقم القومي واسم الجد مع تجاهل حالة الأحرف
-                const student = studentData.find(s => 
-                    String(s["الرقم القومي"]) === nationalIdInput && 
-                    s["اسم الجد"] && s["اسم الجد"].trim().toLowerCase() === grandfatherNameInput.toLowerCase()
-                );
+                // Search for the student using "الرقم القومي"
+                // The national ID in the data is converted to a string for comparison consistency
+                const student = studentData.find(s => String(s["الرقم القومي"]) === nationalIdInput);
 
                 if (student) {
-                    // عرض النتائج إذا تم العثور على الطالب
-                    const platformLink = student["رابط منصة "]; // مفتاح يتضمن مسافة
+                    // Display results if student is found
+                    const platformLink = student["رابط منصة "]; // Note the space in the key
                     
                     const resultsHtml = `
                         <div class="success-message">تم العثور على بيانات الطالب بنجاح!</div>
@@ -482,12 +468,12 @@
                     `;
                     resultsArea.innerHTML = resultsHtml;
                 } else {
-                    // رسالة في حالة عدم العثور على الطالب أو عدم تطابق بيانات الاعتماد
-                    resultsArea.innerHTML = '<div class="error-message">عذرًا، لم يتم العثور على بيانات تطابق **الرقم القومي واسم الجد**. يرجى التأكد من الإدخال أو التواصل مع إدارة المدرسة.</div>';
+                    // Message if student is not found
+                    resultsArea.innerHTML = '<div class="error-message">عذرًا، لم يتم العثور على بيانات لهذا الرقم القومي. يرجى التأكد من الإدخال أو التواصل مع إدارة المدرسة.</div>';
                 }
 
             } catch (error) {
-                // التعامل مع أي أخطاء أثناء جلب البيانات أو معالجتها
+                // Handle any errors during fetching or processing data
                 console.error("Error fetching or processing data:", error);
                 resultsArea.innerHTML = '<div class="error-message">حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقًا.</div>';
             }
