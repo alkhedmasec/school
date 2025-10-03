@@ -250,6 +250,21 @@
             margin-bottom: 15px;
             text-align: center;
         }
+        
+        /* Loading spinner CSS */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, .1);
+            border-left-color: #007bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
         /* القيم الجوهرية (البطاقات) */
         .values-grid {
@@ -543,91 +558,84 @@
     </footer>
 
     <script>
-        // 1. بيانات الطلاب (محاكاة لملف JSON)
-        // يتم وضع البيانات هنا لأننا نعمل في ملف HTML واحد، وفي التطبيق الحقيقي يجب أن يتم جلبها من قاعدة بيانات آمنة.
-        const studentData = [
-            {
-                "الرقم_القومي": "12345678901234",
-                "الاسم": "أحمد محمد علي",
-                "اسم_المستخدم_كوريو": "ahmad.m.ali",
-                "كلمة_المرور_كوريو": "Ahm@d2025",
-                "رابط_المنصة": "https://curio.ai/student_login"
-            },
-            {
-                "الرقم_القومي": "56789012345678",
-                "الاسم": "فاطمة سعيد محمود",
-                "اسم_المستخدم_كوريو": "fatma.s.m",
-                "كلمة_المرور_كوريو": "Fatma#2026",
-                "رابط_المنصة": "https://curio.ai/student_login"
-            },
-            {
-                "الرقم_القومي": "90123456789012",
-                "الاسم": "خالد حسام الدين",
-                "اسم_المستخدم_كوريو": "khaled.h.d",
-                "كلمة_المرور_كوريو": "KhaLd%2025",
-                "رابط_المنصة": "https://curio.ai/student_login"
-            },
-            {
-                "الرقم_القومي": "20242024202420",
-                "الاسم": "طالب تجريبي",
-                "اسم_المستخدم_كوريو": "test.user",
-                "كلمة_المرور_كوريو": "Test#1234",
-                "رابط_المنصة": "https://curio.ai/student_login"
-            }
-        ];
-
-        // 2. دالة البحث عن بيانات الطالب
-        function searchStudentData() {
+        /**
+         * دالة جلب بيانات الطلاب من ملف JSON والبحث فيها.
+         * تم تحويل الدالة إلى async/await لجلب البيانات باستخدام Fetch API.
+         */
+        async function searchStudentData() {
             const nationalIdInput = document.getElementById('nationalId').value.trim();
             const resultsArea = document.getElementById('results-area');
-            resultsArea.innerHTML = ''; // مسح النتائج السابقة
+            resultsArea.innerHTML = '<div class="spinner"></div>'; // Show loading spinner
 
-            // التحقق من صحة الإدخال (يجب أن يكون 14 رقمًا)
+            // Validate input (must be 14 digits)
             if (nationalIdInput.length !== 14 || !/^\d+$/.test(nationalIdInput)) {
                 resultsArea.innerHTML = '<div class="error-message">الرجاء إدخال رقم قومي صحيح مكون من 14 رقمًا.</div>';
                 return;
             }
 
-            // البحث عن الطالب في البيانات
-            const student = studentData.find(s => s["الرقم_القومي"] === nationalIdInput);
+            try {
+                // Fetch data from data.json file
+                const response = await fetch('data.json');
 
-            if (student) {
-                // عرض النتائج إذا تم العثور على الطالب
-                const resultsHtml = `
-                    <div class="success-message">تم العثور على بيانات الطالب بنجاح!</div>
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>البيان</th>
-                                <th>القيمة</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>الاسم الكامل</td>
-                                <td>${student["الاسم"]}</td>
-                            </tr>
-                            <tr>
-                                <td>اليوزر نيم (منصة كوريو)</td>
-                                <td>${student["اسم_المستخدم_كوريو"]}</td>
-                            </tr>
-                            <tr>
-                                <td>كلمة المرور (منصة كوريو)</td>
-                                <td>${student["كلمة_المرور_كوريو"]}</td>
-                            </tr>
-                            <tr>
-                                <td>رابط المنصة</td>
-                                <td>
-                                    <a href="${student["رابط_المنصة"]}" target="_blank" style="color:#007bff; text-decoration:underline; font-weight:700;">انقر للذهاب إلى المنصة</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-                resultsArea.innerHTML = resultsHtml;
-            } else {
-                // رسالة عدم العثور على الطالب
-                resultsArea.innerHTML = '<div class="error-message">عذرًا، لم يتم العثور على بيانات لهذا الرقم القومي. يرجى التأكد من الإدخال أو التواصل مع إدارة المدرسة.</div>';
+                if (!response.ok) {
+                    throw new Error(`Error fetching file: ${response.status} ${response.statusText}`);
+                }
+
+                const studentData = await response.json();
+
+                // Search for the student using "الرقم القومي"
+                // The national ID in the data is converted to a string for comparison consistency
+                const student = studentData.find(s => String(s["الرقم القومي"]) === nationalIdInput);
+
+                if (student) {
+                    // Display results if student is found
+                    const platformLink = student["رابط منصة "]; // Note the space in the key
+                    
+                    const resultsHtml = `
+                        <div class="success-message">تم العثور على بيانات الطالب بنجاح!</div>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>البيان</th>
+                                    <th>القيمة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الاسم الكامل</td>
+                                    <td>${student["الاسم"]}</td>
+                                </tr>
+                                <tr>
+                                    <td>الكود</td>
+                                    <td>${student["الكود"]}</td>
+                                </tr>
+                                <tr>
+                                    <td>اليوزر نيم (اسم المستخدم)</td>
+                                    <td>${student["اسم المستخدم"]}</td>
+                                </tr>
+                                <tr>
+                                    <td>كلمة المرور</td>
+                                    <td><span style="color:#dc3545; font-weight:700;">${student["كلمة المرور"]}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>رابط المنصة</td>
+                                    <td>
+                                        <a href="${platformLink}" target="_blank" style="color:#28a745; text-decoration:underline; font-weight:700;">انقر للذهاب إلى منصة كوريو</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                    resultsArea.innerHTML = resultsHtml;
+                } else {
+                    // Message if student is not found
+                    resultsArea.innerHTML = '<div class="error-message">عذرًا، لم يتم العثور على بيانات لهذا الرقم القومي. يرجى التأكد من الإدخال أو التواصل مع إدارة المدرسة.</div>';
+                }
+
+            } catch (error) {
+                // Handle any errors during fetching or processing data
+                console.error("Error fetching or processing data:", error);
+                resultsArea.innerHTML = '<div class="error-message">حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقًا.</div>';
             }
         }
     </script>
